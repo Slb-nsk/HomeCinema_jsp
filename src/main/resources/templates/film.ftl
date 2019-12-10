@@ -15,7 +15,7 @@
 <p><img src="${movie.imageUrl!}"></p>
 <p>Название фильма на русском: <b>"${movie.movieRussianName!}"</b></p>
 <p>Оригинальное название фильма: <b>("${movie.movieOriginalName!}")</b> </p>
-<p>Год выхода на экраны: <b>${movie.movieYear!}</b> </p>
+<p>Год выхода на экраны: <b>#{movie.movieYear!}</b> </p>
 <p>Страна производства: <b>${movie.countries!}</b> </p>
 <p>Жанр: <b>${movie.genres!}</b> </p>
 <p><b>Описание:</b> ${movie.description!}</p>

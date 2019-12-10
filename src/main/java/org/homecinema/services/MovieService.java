@@ -179,7 +179,7 @@ public class MovieService implements iMovieService {
         }
         Integer year;
         try {
-            year = Integer.valueOf(movieYear);
+            year = Integer.valueOf(movieYear.replaceAll(" ", ""));
         } catch (NumberFormatException e) {
             year = 0;
         }

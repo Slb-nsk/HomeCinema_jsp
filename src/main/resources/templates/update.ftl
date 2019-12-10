@@ -19,11 +19,11 @@
   </p>
 
   <p><b>Год выхода на экраны:</b>
-  <input type="text" name="movieYear" value="${movie.movieYear!}">
+  <input type="text" name="movieYear" value="#{movie.movieYear!}">
   </p>
 
   <p><b>Количество серий:</b>
-  <input type="text" name="seriesAmount" value="${movie.seriesAmount!}">
+  <input type="text" name="seriesAmount" value="#{movie.seriesAmount!}">
   </p>
 
   <p><b>Страна:</b>
@@ -35,7 +35,7 @@
   </p>
 
   <p><b>Описание:</b>
-  <input type="text" name="description" value="${movie.description!}">
+  <textarea rows="10" cols="45" name="description">${movie.description!}</textarea>
   </p>
 
   <p><b>URL картинки:</b>

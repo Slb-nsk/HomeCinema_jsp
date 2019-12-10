@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'idea'
     id "org.springframework.boot" version "2.1.6.RELEASE"
-
+    id 'war'
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -32,4 +32,5 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-jdbc"
     implementation "org.hibernate:hibernate-core:5.4.2.Final"
     implementation "org.springframework.boot:spring-boot-starter-freemarker"
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 }

@@ -79,8 +79,8 @@ public class MovieServiceTest {
                 1,
                 1971,
                 "описание",
-                countries,
-                genres,
+                "",
+                "",
                 "http://example.com",
                 sourceUrl);
 
@@ -98,12 +98,12 @@ public class MovieServiceTest {
         assertEquals(outputMovie.getSeriesAmount(), movie1.getSeriesAmount());
         assertEquals(outputMovie.getMovieOriginalName(), movie1.getMovieOriginalName());
         assertEquals(outputMovie.getMovieRussianName(), movie1.getMovieRussianName());
-        for (int i = 0; i < outputMovie.getGenres().size(); i++) {
-            assertTrue(outputMovie.getGenres().get(i).equals(outputGenres.get(i + 1)));
-        }
-        for (int i = 0; i < outputMovie.getCountries().size(); i++) {
-            assertTrue(outputMovie.getCountries().get(i).equals(outputCountries.get(i + 1)));
-        }
+//        for (int i = 0; i < outputMovie.getGenres().size(); i++) {
+//            assertTrue(outputMovie.getGenres().get(i).equals(outputGenres.get(i + 1)));
+//        }
+//        for (int i = 0; i < outputMovie.getCountries().size(); i++) {
+//            assertTrue(outputMovie.getCountries().get(i).equals(outputCountries.get(i + 1)));
+//        }
 
         Mockito.verify(dao).cinemaById(anyInt());
         Mockito.verify(dao).movieGenre(anyInt());
@@ -132,8 +132,8 @@ public class MovieServiceTest {
                 1,
                 1971,
                 "описание",
-                countries,
-                genres,
+                "",
+                "",
                 "http://example.com",
                 sourceUrl);
         Mockito.doReturn(movie1).when(dao).cinemaById(movie1.getMovieId());
@@ -150,8 +150,8 @@ public class MovieServiceTest {
         assertEquals(outputMovie.getSeriesAmount(), movie1.getSeriesAmount());
         assertEquals(outputMovie.getMovieOriginalName(), movie1.getMovieOriginalName());
         assertEquals(outputMovie.getMovieRussianName(), movie1.getMovieRussianName());
-        assertThat(outputMovie.getGenres(), is(Collections.emptyList()));
-        assertThat(outputMovie.getCountries(), is(Collections.emptyList()));
+        assertEquals(outputMovie.getGenres(), "");
+        assertEquals(outputMovie.getCountries(), "");
 
         Mockito.verify(dao).cinemaById(anyInt());
         Mockito.verify(dao).movieGenre(anyInt());
@@ -178,7 +178,6 @@ public class MovieServiceTest {
                 "",
                 genres,
                 countries,
-                "",
                 "");
 
         //then
@@ -205,7 +204,6 @@ public class MovieServiceTest {
                 "",
                 genres,
                 countries,
-                "",
                 "");
 
         //then
@@ -236,7 +234,6 @@ public class MovieServiceTest {
                 "",
                 genres,
                 countries,
-                "",
                 "");
 
         //then

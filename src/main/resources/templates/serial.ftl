@@ -18,8 +18,8 @@
 <p><img src="${movie.imageUrl!}"></p>
 <p>Название сериала на русском: <b>"${movie.movieRussianName!}"</b></p>
 <p>Оригинальное название сериала: <b>("${movie.movieOriginalName!}")</b> </p>
-<p>Год выхода на экраны: <b>${movie.movieYear!}</b> </p>
-<p>Количество серий: <b>${movie.seriesAmount!}</b> </p>
+<p>Год выхода на экраны: <b>#{movie.movieYear!}</b> </p>
+<p>Количество серий: <b>#{movie.seriesAmount!}</b> </p>
 <p>Страна производства: <b>${movie.countries!}</b> </p>
 <p>Жанр: <b>${movie.genres!}</b> </p>
 <p><b>Описание:</b> ${movie.description!}</p>
@@ -28,7 +28,7 @@
 <td width=50%>
   <#list movie.sourceUrl as seria>
   <table style="width:`9%; float:left;" frame="border">
-   <tr><td><center><a href="${seria!}">Серия ${seria?counter}</a></center></td></tr>
+   <tr><td><center><a href="${seria!}">Серия #{seria?counter}</a></center></td></tr>
    </table>
   </#list>
 </td>

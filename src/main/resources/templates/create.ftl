@@ -34,17 +34,19 @@
   <input type="text" name="movieGenres">
   </p>
 
+
   <p><b>Описание:</b>
-  <input type="text" name="description">
+  <textarea rows="10" cols="45" name="description"></textarea>
   </p>
 
-    <p><b>URL картинки:</b>
-    <input type="text" name="imageUrl">
-    </p>
 
-    <p>URL места в интернете, где находится фильм/сериал вносится путём
-    редактирования данных об уже имеющемся в базе объекте.
-    </p>
+  <p><b>URL картинки:</b>
+  <input type="text" name="imageUrl">
+  </p>
+
+  <p>URL места в интернете, где находится фильм/сериал вносится путём
+  редактирования данных об уже имеющемся в базе объекте.
+  </p>
 
   <p>
   <input type="submit" value="Внести">
