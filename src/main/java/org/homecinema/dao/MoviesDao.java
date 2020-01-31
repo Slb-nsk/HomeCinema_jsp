@@ -3,6 +3,7 @@ package org.homecinema.dao;
 import org.homecinema.entities.CountryEntity;
 import org.homecinema.entities.GenreEntity;
 import org.homecinema.entities.Movie;
+import org.homecinema.entities.ShortMovie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -231,6 +232,11 @@ public class MoviesDao {
                 .setParameter("movieId", movieId)
                 .setParameter("countryId", countryId);
         query.executeUpdate();
+    }
+
+    //поиск фильма/сериала
+    public List<Movie> foundCinema(String sql) {
+        return em.createNativeQuery(sql, Movie.class).getResultList();
     }
 }
 

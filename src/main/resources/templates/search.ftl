@@ -1,4 +1,4 @@
-<form>
+<form action="/search">
  <table>
  <tr>
  <th align="left">Тип:</th>
@@ -21,7 +21,7 @@
    <td> <input name="genre" type="radio" value="Боевик">Боевик</td>
  </tr>
  </table>
-<p><input type="submit" value="Выбрать" (click)="findMovies(kind, country, genre)"></p>
+<p><input type="submit" value="Выбрать"></p>
 </form>
 
 <p><a href="/add">Добавить новый фильм/сериал</a></p>

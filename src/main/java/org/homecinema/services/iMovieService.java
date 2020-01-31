@@ -4,6 +4,7 @@ import org.homecinema.entities.ExtendedMovie;
 import org.homecinema.entities.ShortMovie;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface iMovieService {
 
@@ -90,5 +91,13 @@ public interface iMovieService {
      * @param movieId   Номер фильма в базе *
      */
     void deleteMovie(Integer movieId);
+
+    /**
+     * @param kind    Фильм или сериал
+     * @param country Страна
+     * @param genre   Жанр
+     * @return Список фильмов из базы, удовлетворяющих условиям поика, в краткой форме
+     */
+    ArrayList<ShortMovie> doSearch(String kind, String country, String genre);
 
 }

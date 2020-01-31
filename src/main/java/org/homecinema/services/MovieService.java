@@ -315,4 +315,35 @@ public class MovieService implements iMovieService {
         dao.deleteMovie(movieId);
     }
 
+
+    public ArrayList<ShortMovie> doSearch(String kind, String country, String genre) {
+        String sql = "SELECT m.movieId, m.movieRussianName, m.movieOriginalName, m.seriesAmount, m.movieYear, m.imageUrl, m.description FROM movies m ";
+        if (!country.equals("Any")) {
+            sql += "JOIN moviecountries mc ON m.movieId = mc.movieId ";
+            sql += "JOIN countries c ON mc.countryId = c.countryId AND c.country = '";
+            sql += country;
+            sql += "'";
+        }
+        if (!genre.equals("Any")) {
+            sql += "JOIN moviegenres mg ON m.movieId = mg.movieId ";
+            sql += "JOIN genres g ON mg.genreId = g.genreId AND g.genre = '";
+            sql += genre;
+            sql += "'";
+        }
+        sql += ";";
+        System.out.println("sql = " + sql);
+        List<Movie> fullList = dao.foundCinema(sql);
+        ArrayList<ShortMovie> outputList = new ArrayList<>();
+        for (Movie movie : fullList) {
+            ShortMovie sm = new ShortMovie(movie.getMovieId(),
+                    movie.getMovieRussianName(),
+                    movie.getMovieOriginalName(),
+                    movie.getSeriesAmount(),
+                    movie.getMovieYear(),
+                    movie.getImageUrl());
+            outputList.add(sm);
+        }
+        return outputList;
+    }
+
 }

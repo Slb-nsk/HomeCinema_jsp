@@ -139,11 +139,11 @@ public class WebController {
     @PostMapping(path = "/changeurl/{movieId}")
     public ModelAndView updateURL(@PathVariable Integer movieId, @RequestParam HashMap<String, String> series) {
         ArrayList<String> seriesUrl = new ArrayList<>();
-        seriesUrl.add(0,"");
-        for (String k: series.keySet()){
-            seriesUrl.add(Integer.parseInt(k.substring(5)),series.get(k));
+        seriesUrl.add(0, "");
+        for (String k : series.keySet()) {
+            seriesUrl.add(Integer.parseInt(k.substring(5)), series.get(k));
         }
-        service.changeUrl(movieId,seriesUrl);
+        service.changeUrl(movieId, seriesUrl);
         this.genres = service.getGenresList();
         this.countries = service.getcountriesList();
         ExtendedMovie em = service.getCinemaById(movieId, genres, countries);
@@ -167,6 +167,19 @@ public class WebController {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("start");
         mav.addObject("searchResult", service.getFullCinemaList());
+        mav.setStatus(HttpStatus.OK);
+        return mav;
+    }
+
+    @GetMapping("/search")
+    public ModelAndView searchMovies(@RequestParam String kind, String country, String genre) {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("start");
+        if (kind.equals("Any") && country.equals("Any") && genre.equals("Any")) {
+            mav.addObject("searchResult", service.getFullCinemaList());
+        } else {
+            mav.addObject("searchResult", service.doSearch(kind, country, genre));
+        }
         mav.setStatus(HttpStatus.OK);
         return mav;
     }
