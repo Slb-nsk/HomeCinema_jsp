@@ -27,7 +27,7 @@ public class CountryEntity {
     }
 
     public void setCountry(String country) {
-        this.country = country;
+        this.country = country.trim();
     }
 }
 

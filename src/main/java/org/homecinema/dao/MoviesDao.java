@@ -3,9 +3,7 @@ package org.homecinema.dao;
 import org.homecinema.entities.CountryEntity;
 import org.homecinema.entities.GenreEntity;
 import org.homecinema.entities.Movie;
-import org.homecinema.entities.ShortMovie;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
@@ -21,12 +19,11 @@ public class MoviesDao {
 
     @PersistenceContext
     private EntityManager em;
-    private final JdbcTemplate jdbcTemplate;
+
 
     @Autowired
-    public MoviesDao(EntityManager em, JdbcTemplate jdbcTemplate) {
+    public MoviesDao(EntityManager em) {
         this.em = em;
-        this.jdbcTemplate = jdbcTemplate;
     }
 
     //список всех фильмов в базе

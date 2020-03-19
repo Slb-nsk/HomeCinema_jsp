@@ -16,9 +16,9 @@
  <tr>
  <th align="left">Жанр:</th>
    <td> <input name="genre" type="radio" value="Any" checked>Любой</td>
-   <td> <input name="genre" type="radio" value="История">История</td>
-   <td> <input name="genre" type="radio" value="Военный">Военный</td>
-   <td> <input name="genre" type="radio" value="Боевик">Боевик</td>
+   <td> <input name="genre" type="radio" value="история">История</td>
+   <td> <input name="genre" type="radio" value="военный">Военный</td>
+   <td> <input name="genre" type="radio" value="боевик">Боевик</td>
  </tr>
  </table>
 <p><input type="submit" value="Выбрать"></p>

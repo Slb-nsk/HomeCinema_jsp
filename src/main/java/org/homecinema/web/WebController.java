@@ -9,7 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 public class WebController {
@@ -128,7 +127,6 @@ public class WebController {
     @GetMapping(path = "/changeurl/{movieId}")
     public ModelAndView changeUrl(@PathVariable int movieId) {
         ExtendedMovie em = service.getCinemaById(movieId, genres, countries);
-//        System.out.println(em);
         ModelAndView mav = new ModelAndView();
         mav.setViewName("changeurl");
         mav.addObject("movie", em);
@@ -147,7 +145,6 @@ public class WebController {
         this.genres = service.getGenresList();
         this.countries = service.getcountriesList();
         ExtendedMovie em = service.getCinemaById(movieId, genres, countries);
-//        System.out.println(em);
         ModelAndView mav = new ModelAndView();
         if (em.getSeriesAmount() < 2) {
             mav.setViewName("film");

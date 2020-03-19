@@ -42,7 +42,7 @@ public class Movie {
     }
 
     public void setMovieRussianName(String movieRussianName) {
-        this.movieRussianName = movieRussianName;
+        this.movieRussianName = movieRussianName.trim();
     }
 
     public String getMovieOriginalName() {
@@ -50,7 +50,7 @@ public class Movie {
     }
 
     public void setMovieOriginalName(String movieOriginalName) {
-        this.movieOriginalName = movieOriginalName;
+        this.movieOriginalName = movieOriginalName.trim();
     }
 
     public Integer getSeriesAmount() {
@@ -89,8 +89,8 @@ public class Movie {
     }
 
     public Movie(String movieRussianName, String movieOriginalName, Integer seriesAmount, Integer movieYear, String description, String imageUrl) {
-        this.movieRussianName = movieRussianName;
-        this.movieOriginalName = movieOriginalName;
+        this.movieRussianName = movieRussianName.trim();
+        this.movieOriginalName = movieOriginalName.trim();
         this.seriesAmount = seriesAmount;
         this.movieYear = movieYear;
         this.description = description;
@@ -99,8 +99,8 @@ public class Movie {
 
     public Movie(Integer movieId, String movieRussianName, String movieOriginalName, Integer seriesAmount, Integer movieYear, String description) {
         this.movieId = movieId;
-        this.movieRussianName = movieRussianName;
-        this.movieOriginalName = movieOriginalName;
+        this.movieRussianName = movieRussianName.trim();
+        this.movieOriginalName = movieOriginalName.trim();
         this.seriesAmount = seriesAmount;
         this.movieYear = movieYear;
         this.description = description;
@@ -108,8 +108,8 @@ public class Movie {
 
     public Movie(Integer movieId, String movieRussianName, String movieOriginalName, Integer seriesAmount, Integer movieYear, String description, String imageUrl) {
         this.movieId = movieId;
-        this.movieRussianName = movieRussianName;
-        this.movieOriginalName = movieOriginalName;
+        this.movieRussianName = movieRussianName.trim();
+        this.movieOriginalName = movieOriginalName.trim();
         this.seriesAmount = seriesAmount;
         this.movieYear = movieYear;
         this.description = description;

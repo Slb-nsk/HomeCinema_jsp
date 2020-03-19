@@ -11,8 +11,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static java.util.Collections.emptyList;
-
 @Service
 @Transactional
 public class MovieService implements iMovieService {
@@ -53,13 +51,13 @@ public class MovieService implements iMovieService {
         String movieGenres = "";
         if (!listGenres.isEmpty()) {
             if (listGenres.size() == 1) {
-                movieGenres = genres.get(listGenres.get(0));
+                movieGenres = firstUpperCase(genres.get(listGenres.get(0)));
             } else {
                 StringBuilder result = new StringBuilder();
                 for (Integer i : listGenres) {
                     result.append(genres.get(i)).append(", ");
                 }
-                movieGenres = result.substring(0, result.length() - 3) + ".";
+                movieGenres = firstUpperCase(result.substring(0, result.length() - 2)) + ".";
             }
         }
 
@@ -73,7 +71,7 @@ public class MovieService implements iMovieService {
                 for (Integer i : listCountries) {
                     result.append(countries.get(i)).append(", ");
                 }
-                movieCountries = result.substring(0, result.length() - 3) + ".";
+                movieCountries = result.substring(0, result.length() - 2) + ".";
             }
         }
 
@@ -84,7 +82,7 @@ public class MovieService implements iMovieService {
             sourceUrl.add(dao.movieSource(movieId, i));
         }
 
-        ExtendedMovie em = new ExtendedMovie(movieId,
+        return new ExtendedMovie(movieId,
                 qm.getMovieRussianName(),
                 qm.getMovieOriginalName(),
                 seriesAmount,
@@ -94,7 +92,6 @@ public class MovieService implements iMovieService {
                 movieGenres,
                 qm.getImageUrl(),
                 sourceUrl);
-        return em;
 
     }
 
@@ -108,15 +105,15 @@ public class MovieService implements iMovieService {
                          ArrayList<String> genres,
                          ArrayList<String> countries,
                          String imageUrl) {
-        Integer seriesNumber;
+        int seriesNumber;
         try {
-            seriesNumber = Integer.valueOf(seriesAmount);
+            seriesNumber = Integer.parseInt(seriesAmount);
         } catch (NumberFormatException e) {
             seriesNumber = 1;
         }
-        Integer year;
+        int year;
         try {
-            year = Integer.valueOf(movieYear);
+            year = Integer.parseInt(movieYear);
         } catch (NumberFormatException e) {
             year = 0;
         }
@@ -132,31 +129,27 @@ public class MovieService implements iMovieService {
             movieCountries = movieCountries.substring(0, movieCountries.length() - 2);
         }
         ArrayList<String> countriesList = new ArrayList<>(Arrays.asList(movieCountries.split(",")));
-        if (countriesList != null) {
-            for (String c : countriesList) {
-                if (!countries.contains(c)) {
-                    CountryEntity newCountry = new CountryEntity();
-                    newCountry.setCountry(c);
-                    dao.addNewCountry(newCountry);
-                    countries = dao.countriesList();
-                }
-                dao.addMovieCountry(cinemaId, countries.indexOf(c));
+        for (String c : countriesList) {
+            if (!countries.contains(c.trim())) {
+                CountryEntity newCountry = new CountryEntity();
+                newCountry.setCountry(c);
+                dao.addNewCountry(newCountry);
+                countries = dao.countriesList();
             }
+            dao.addMovieCountry(cinemaId, countries.indexOf(c.trim()));
         }
         if (movieGenres.endsWith(".")) {
             movieGenres = movieGenres.substring(0, movieGenres.length() - 2);
         }
         ArrayList<String> genresList = new ArrayList<>(Arrays.asList(movieGenres.split(",")));
-        if (genresList != null) {
-            for (String g : genresList) {
-                if (!genres.contains(g)) {
-                    GenreEntity newGenre = new GenreEntity();
-                    newGenre.setGenre(g);
-                    dao.addNewGenre(newGenre);
-                    genres = dao.genresList();
-                }
-                dao.addMovieGenre(cinemaId, genres.indexOf(g));
+        for (String g : genresList) {
+            if (!genres.contains(g.trim().toLowerCase())) {
+                GenreEntity newGenre = new GenreEntity();
+                newGenre.setGenre(g);
+                dao.addNewGenre(newGenre);
+                genres = dao.genresList();
             }
+            dao.addMovieGenre(cinemaId, genres.indexOf(g.trim().toLowerCase()));
         }
     }
 
@@ -171,15 +164,15 @@ public class MovieService implements iMovieService {
                             ArrayList<String> genres,
                             ArrayList<String> countries,
                             String imageUrl) {
-        Integer seriesNumber;
+        int seriesNumber;
         try {
-            seriesNumber = Integer.valueOf(seriesAmount);
+            seriesNumber = Integer.parseInt(seriesAmount);
         } catch (NumberFormatException e) {
             seriesNumber = 0;
         }
-        Integer year;
+        int year;
         try {
-            year = Integer.valueOf(movieYear.replaceAll(" ", ""));
+            year = Integer.parseInt(movieYear.replaceAll(" ", ""));
         } catch (NumberFormatException e) {
             year = 0;
         }
@@ -192,7 +185,7 @@ public class MovieService implements iMovieService {
                 imageUrl);
         dao.updateCinema(updatingCinema);
 
-        ArrayList<Integer> oldList = new ArrayList<Integer>(dao.movieCountry(movieId));
+        ArrayList<Integer> oldList = new ArrayList<>(dao.movieCountry(movieId));
         if (movieCountries.isEmpty()) {
             for (Integer i : oldList) {
                 dao.deleteMovieCountry(movieId, oldList.get(i));
@@ -201,18 +194,18 @@ public class MovieService implements iMovieService {
             ArrayList<String> countriesList = new ArrayList<>(Arrays.asList(movieCountries.split(",")));
             ArrayList<Integer> newList = new ArrayList<>();
             for (String c : countriesList) {
-                if (!countries.contains(c)) {
+                if (!countries.contains(c.trim())) {
                     CountryEntity newCountry = new CountryEntity();
                     newCountry.setCountry(c);
                     dao.addNewCountry(newCountry);
                     countries = dao.countriesList();
                 }
-                newList.add(countries.indexOf(c));
+                newList.add(countries.indexOf(c.trim()));
             }
             Collections.sort(oldList);
             Collections.sort(newList);
             for (int i = 0, j = 0; i < oldList.size() && j < newList.size(); ) {
-                if (oldList.get(i) == newList.get(j)) {
+                if (oldList.get(i).equals(newList.get(j))) {
                     i++;
                     j++;
                 } else if (oldList.get(i) > newList.get(j)) {
@@ -235,7 +228,7 @@ public class MovieService implements iMovieService {
             }
 
 
-            oldList = new ArrayList<Integer>(dao.movieGenre(movieId));
+            oldList = new ArrayList<>(dao.movieGenre(movieId));
             if (movieGenres.isEmpty()) {
                 for (Integer i : oldList) {
                     dao.deleteMovieGenre(movieId, oldList.get(i));
@@ -244,19 +237,19 @@ public class MovieService implements iMovieService {
                 ArrayList<String> genresList = new ArrayList<>(Arrays.asList(movieGenres.split(",")));
                 newList = new ArrayList<>();
                 for (String g : genresList) {
-                    if (!genres.contains(g)) {
+                    if (!genres.contains(g.trim().toLowerCase())) {
                         GenreEntity newGenre = new GenreEntity();
                         newGenre.setGenre(g);
                         dao.addNewGenre(newGenre);
                         genres = dao.genresList();
                     }
-                    newList.add(genres.indexOf(g));
+                    newList.add(genres.indexOf(g.trim().toLowerCase()));
                 }
                 Collections.sort(oldList);
                 Collections.sort(newList);
 
                 for (int i = 0, j = 0; i < oldList.size() && j < newList.size(); ) {
-                    if (oldList.get(i) == newList.get(j)) {
+                    if (oldList.get(i).equals(newList.get(j))) {
                         i++;
                         j++;
                     } else if (oldList.get(i) > newList.get(j)) {
@@ -331,7 +324,7 @@ public class MovieService implements iMovieService {
             sql += "'";
         }
         sql += ";";
-        System.out.println("sql = " + sql);
+
         List<Movie> fullList = dao.foundCinema(sql);
         ArrayList<ShortMovie> outputList = new ArrayList<>();
         for (Movie movie : fullList) {
@@ -344,6 +337,13 @@ public class MovieService implements iMovieService {
             outputList.add(sm);
         }
         return outputList;
+    }
+
+
+
+    private String firstUpperCase(String word){
+        if(word == null || word.isEmpty()) return "";
+        return word.substring(0, 1).toUpperCase() + word.substring(1);
     }
 
 }

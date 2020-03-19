@@ -31,7 +31,16 @@ public class ExtendedMovie extends Movie {
         this.sourceUrl = sourceUrl;
     }
 
-    public ExtendedMovie(Integer movieId, String movieRussianName, String movieOriginalName, Integer seriesAmount, Integer movieYear, String description, String countries, String genres, String imageUrl, ArrayList<String> sourceUrl) {
+    public ExtendedMovie(Integer movieId,
+                         String movieRussianName,
+                         String movieOriginalName,
+                         Integer seriesAmount,
+                         Integer movieYear,
+                         String description,
+                         String countries,
+                         String genres,
+                         String imageUrl,
+                         ArrayList<String> sourceUrl) {
         super(movieId, movieRussianName, movieOriginalName, seriesAmount, movieYear, description, imageUrl);
         this.countries = countries;
         this.genres = genres;

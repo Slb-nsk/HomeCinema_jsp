@@ -27,7 +27,7 @@ public class GenreEntity {
     }
 
     public void setGenre(String genre) {
-        this.genre = genre;
+        this.genre = genre.trim().toLowerCase();
     }
 }
 
