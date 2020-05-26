@@ -12,7 +12,7 @@
                        </#if>
                        <tr><td align="center"><b>("${item.movieOriginalName!}")</b> </td></tr>
                        <tr><td><b>Год выхода на экран:</b> #{item.movieYear!} </td></tr>
-                       <tr><td><a href="/${item.movieId}">Подробнее</a></td></tr></tr>
+                       <tr><td><a href="/${item.movieId}/1">Подробнее</a></td></tr></tr>
                      </table></td>
                      <#if (item?counter +5)%5 == 0>
                      </tr>

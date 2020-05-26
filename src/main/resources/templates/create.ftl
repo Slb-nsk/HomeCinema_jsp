@@ -55,8 +55,8 @@
 </form>
 </div>
 
-<a routerLink="">На главную</a>
-
 </body>
+
+<p><a href="/">На главную</a></p>
 
 </html>

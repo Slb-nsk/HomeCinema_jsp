@@ -1,3 +1,5 @@
+<#import "ui.ftl" as ui/>
+
 <!DOCTYPE html>
 
 <html>
@@ -10,21 +12,31 @@
 
     <hr>
 
-<h3>${movie.movieRussianName!}</h3>
+<h1 align=center>${movie.movieRussianName!}</h1>
 
-<p><img src="${movie.imageUrl!}"></p>
+<table>
+<tr>
+
+<td width=70%>
+<#list movie.sourceUrl as seria>
+<#if seria?has_content>
+<@ui.videoPlayer url="${seria!}"/>
+</#if>
+</#list>
+</td>
+
+<td>
+<#-- <p><img src="${movie.imageUrl!}"></p> -->
 <p>Название фильма на русском: <b>"${movie.movieRussianName!}"</b></p>
 <p>Оригинальное название фильма: <b>("${movie.movieOriginalName!}")</b> </p>
 <p>Год выхода на экраны: <b>#{movie.movieYear!}</b> </p>
 <p>Страна производства: <b>${movie.countries!}</b> </p>
 <p>Жанр: <b>${movie.genres!}</b> </p>
 <p><b>Описание:</b> ${movie.description!}</p>
+</td>
 
-<#list movie.sourceUrl as seria>
-<p>Ссылка: <a href="${seria!}">Фильм</a> </p>
-</#list>
-
-<a href="/">На главную</a>
+</tr>
+</table>
 
 <hr>
 
