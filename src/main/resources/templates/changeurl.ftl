@@ -24,6 +24,8 @@
 </form>
 </div>
 
+<p><a href="/">На главную</a></p>
+
 </body>
 
 </html>

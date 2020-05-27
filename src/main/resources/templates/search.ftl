@@ -24,9 +24,5 @@
 <p><input type="submit" value="Выбрать"></p>
 </form>
 
-<table>
-<tr>
-<td><a href="/add">Добавить новый фильм/сериал</a></td>
-<td><a href="/">На главную</a></td>
-</tr>
-</table>
+<p><a href="/add">Добавить новый фильм/сериал</a></p>
+

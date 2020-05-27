@@ -52,8 +52,8 @@
  <p><a href="/changeurl/${movie.movieId}">Обновление собственно ссылок на видео</a>
   </p>
 
-</body>
-
 <p><a href="/">На главную</a></p>
+
+</body>
 
 </html>

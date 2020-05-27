@@ -315,23 +315,14 @@ public class MovieService implements iMovieService {
             sql += "JOIN moviecountries mc ON m.movieId = mc.movieId ";
             sql += "JOIN countries c ON mc.countryId = c.countryId AND c.country = '";
             sql += country;
-            sql += "' ";
+            sql += "'";
         }
         if (!genre.equals("Any")) {
             sql += "JOIN moviegenres mg ON m.movieId = mg.movieId ";
             sql += "JOIN genres g ON mg.genreId = g.genreId AND g.genre = '";
             sql += genre;
-            sql += "' ";
+            sql += "'";
         }
-        if (!kind.equals("Any")){
-            if (kind.equals("Mov")) {
-                sql += "WHERE m.seriesamount = '1' ";
-            }
-            if (kind.equals("Ser")) {
-                sql += "WHERE m.seriesamount > '1' ";
-            }
-        }
-
         sql += ";";
 
         List<Movie> fullList = dao.foundCinema(sql);

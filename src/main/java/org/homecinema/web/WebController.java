@@ -55,15 +55,15 @@ public class WebController {
         return mav;
     }
 
-    @GetMapping("/{movieId}/{seriaSelected}")
-    public ModelAndView movieById(@PathVariable int movieId, @PathVariable int seriaSelected) {
+    @GetMapping("/{movieId}")
+    public ModelAndView movieById(@PathVariable int movieId) {
         ExtendedMovie em = service.getCinemaById(movieId, genres, countries);
+//        System.out.println(em);
         ModelAndView mav = new ModelAndView();
         if (em.getSeriesAmount() < 2) {
             mav.setViewName("film");
         } else {
             mav.setViewName("serial");
-            mav.addObject("seriaSelected", seriaSelected);
         }
         mav.addObject("movie", em);
         mav.setStatus(HttpStatus.OK);
@@ -150,7 +150,6 @@ public class WebController {
             mav.setViewName("film");
         } else {
             mav.setViewName("serial");
-            mav.addObject("seriaSelected", 1);
         }
         mav.addObject("movie", em);
         mav.setStatus(HttpStatus.OK);
